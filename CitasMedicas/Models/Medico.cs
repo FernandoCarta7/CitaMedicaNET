@@ -1,18 +1,22 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CitasMedicas.Models
+
 {
+[Table("Medico")]
     public class Medico
-    {
-        private int IdMedico { get; set; }
+    {   
+        [Key]
+        public int id_medico { get; set; }
         [Required]
-        private string Nombres { get; set; }
+        public string Nombres { get; set; }
 
         [Required]
-        private string Apellidos { get; set; }
-        
+        public string Apellidos { get; set; }
+
         [Required]
-        private string Especialidad { get; set; }
+        public string Especialidad { get; set; }
 
 
     }

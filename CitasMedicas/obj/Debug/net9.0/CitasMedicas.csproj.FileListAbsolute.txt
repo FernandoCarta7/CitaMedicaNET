@@ -157,3 +157,4 @@ C:\Users\carta\Documents\CitaNET\CitasMedicas\obj\Debug\net9.0\refint\CitasMedic
 C:\Users\carta\Documents\CitaNET\CitasMedicas\obj\Debug\net9.0\CitasMedicas.pdb
 C:\Users\carta\Documents\CitaNET\CitasMedicas\obj\Debug\net9.0\CitasMedicas.genruntimeconfig.cache
 C:\Users\carta\Documents\CitaNET\CitasMedicas\obj\Debug\net9.0\ref\CitasMedicas.dll
+C:\Users\carta\Documents\CitaNET\CitasMedicas\obj\Debug\net9.0\CitasMedicas.sourcelink.json

@@ -10,6 +10,8 @@ namespace CitasMedicas.Data
         {
         }
 
+        public DbSet<Cita> Cita { get; set; }
+        public DbSet<Medico> Medico { get; set; }
         public DbSet<Paciente> Paciente { get; set; }
     }
 }

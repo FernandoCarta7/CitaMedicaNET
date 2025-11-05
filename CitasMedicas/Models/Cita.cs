@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CitasMedicas.Models
 {
+    [Table("Cita")]
     public class Cita
     {
-        private int id_cita { get; set; }
+        [Key]
+        public int id_cita { get; set; }
 
-        private DateTime fecha_cita { get; set; }
+        public DateTime fecha_cita { get; set; }
     }
 }
