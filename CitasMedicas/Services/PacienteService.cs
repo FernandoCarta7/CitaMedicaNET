@@ -1,4 +1,5 @@
 
+using System.Threading.Tasks;
 using CitasMedicas.Data;
 using CitasMedicas.Models;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,11 @@ namespace CitasMedicas.Services
             _context = context;
         }
 
-        public Task<Paciente> AddAsync(Paciente paciente)
+        public async Task<Paciente> AddAsync(Paciente paciente)
         {
-            throw new NotImplementedException();
+
+            await _context.AddAsync(paciente);
+            return paciente;
         }
 
         public Task<bool> DeleteAsync(int id)
@@ -41,6 +44,71 @@ namespace CitasMedicas.Services
         {
             throw new NotImplementedException();
         }
+        public async Task<Paciente> getPacienteRandom()
+        {
+            Paciente paciente = new Paciente();
+            List<string> listaNombresMasculinos = new List<string>
+    {
+        "Juan", "Carlos", "Luis", "José", "Miguel",
+        "Andrés", "Fernando", "Javier", "Alejandro", "Ricardo",
+        "Manuel", "Eduardo", "Sergio", "Raúl", "Antonio",
+        "Roberto", "Diego", "Adrián", "Francisco", "Héctor",
+        "Cristian", "Julio", "Daniel", "Marco", "Oscar",
+        "Gabriel", "David", "Mario", "Esteban", "Martín",
+        "Tomás", "Hernán", "Rafael", "Iván", "Emilio",
+        "Alberto", "Rodrigo", "Gustavo", "Felipe", "Sebastián",
+        "Mauricio", "Nicolás", "Pablo", "Álvaro", "Leonardo",
+        "Ramiro", "Jorge", "Mateo", "Ignacio", "Simón"
+    };
+
+            List<string> listaApellidos = new List<string>
+    {
+        "González", "Rodríguez", "García", "Martínez", "López",
+        "Pérez", "Sánchez", "Ramírez", "Torres", "Flores",
+        "Rivera", "Gómez", "Díaz", "Hernández", "Vásquez",
+        "Romero", "Morales", "Ortiz", "Jiménez", "Reyes",
+        "Ruiz", "Castro", "Mendoza", "Silva", "Moreno",
+        "Guerrero", "Rojas", "Núñez", "Cruz", "Delgado",
+        "Ramos", "Molina", "Suárez", "Aguilar", "Vargas",
+        "Medina", "Paredes", "Carrillo", "Cortés", "Santos",
+        "Peña", "Campos", "Fuentes", "Navarro", "Cabrera",
+        "León", "Salazar", "Mejía", "Herrera", "Calderón"
+    };
+
+            Random random = new Random();
+
+            // Generar nombres y apellidos
+            string nombre = listaNombresMasculinos[random.Next(listaNombresMasculinos.Count)];
+            string segundoNombre = listaNombresMasculinos[random.Next(listaNombresMasculinos.Count)];
+            string apellido1 = listaApellidos[random.Next(listaApellidos.Count)];
+            string apellido2 = listaApellidos[random.Next(listaApellidos.Count)];
+
+            paciente.nombres = $"{nombre} {segundoNombre}";
+            paciente.apellidos = $"{apellido1} {apellido2}";
+            paciente.email = $"{nombre.ToLower()}.{apellido1.ToLower()}@correo.com";
+
+            // Generar fecha de nacimiento (válida)
+            int year = random.Next(1970, 2005);
+            int month = random.Next(1, 13);
+            int day = random.Next(1, DateTime.DaysInMonth(year, month) + 1);
+            paciente.fechaNacimiento = new DateOnly(year, month, day);
+
+            // Construir sentencia SQL válida para SQL Server
+            string sqlInsert = $@"
+INSERT INTO Paciente (nombres, apellidos, email, fechaNacimiento)
+VALUES ('{paciente.nombres.Replace("'", "''")}', 
+        '{paciente.apellidos.Replace("'", "''")}', 
+        '{paciente.email}', 
+        '{paciente.fechaNacimiento:yyyy-MM-dd}');";
+
+            Console.WriteLine(sqlInsert);
+
+
+
+            return paciente;
+        }
+        
+
 
         /**Task<bool> UpdateAsync(int id, Paciente paciente)
         {

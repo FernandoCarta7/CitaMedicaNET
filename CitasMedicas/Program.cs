@@ -10,6 +10,7 @@ builder.Services.AddDbContext<CitasMedicasDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<PacienteService>();
+builder.Services.AddScoped<MedicoService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

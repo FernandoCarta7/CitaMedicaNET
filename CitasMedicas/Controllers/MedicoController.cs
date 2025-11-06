@@ -5,23 +5,19 @@ namespace CitasMedicas.Controllers;
 
 [ApiController]
 [Route("app/[controller]")]
-public class PacienteController : ControllerBase
+public class MedicoController : ControllerBase
 {
-    private PacienteService _service;
+    private MedicoService _service;
 
-    public PacienteController(PacienteService service)
+    public MedicoController(MedicoService service)
     {
         _service = service;
     }
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var pacientes = await _service.GetAllAsync();
+        var medicos = await _service.GetAllAsync();
         
-        
-        
-        return Ok(pacientes);
+        return Ok(medicos);
     }
-
-    
 }
