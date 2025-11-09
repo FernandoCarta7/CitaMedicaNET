@@ -11,6 +11,7 @@ builder.Services.AddDbContext<CitasMedicasDbContext>(options =>
 
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<MedicoService>();
+builder.Services.AddScoped<CitaService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

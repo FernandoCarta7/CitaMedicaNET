@@ -10,13 +10,13 @@ namespace CitasMedicas.Models
         [Key]
         public int id_medico { get; set; }
         [Required]
-        public string Nombres { get; set; }
+        public string ?Nombres { get; set; }
 
         [Required]
-        public string Apellidos { get; set; }
+        public string ?Apellidos { get; set; }
 
         [Required]
-        public string Especialidad { get; set; }
+        public string ?Especialidad { get; set; }
 
 
     }

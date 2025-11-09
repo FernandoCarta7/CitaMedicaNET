@@ -9,14 +9,14 @@ namespace CitasMedicas.Models
         [Key]
         public int id_paciente { get; set; }
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        public string nombres { get; set; }
+        public string ?Nombres { get; set; }
 
         [Required(ErrorMessage = "El apellido es obligatorio")]
-        public string apellidos { get; set; }
+        public string ?Apellidos { get; set; }
         [EmailAddress(ErrorMessage = "Debe ingresar un correo válido")]
-        public string email { get; set; }
+        public string ?Email { get; set; }
        
-        public DateOnly fechaNacimiento { get; set; }
+        public DateOnly FechaNacimiento { get; set; }
 
     }
 }

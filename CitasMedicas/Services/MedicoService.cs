@@ -15,29 +15,52 @@ namespace CitasMedicas.Services
 
         public async Task<Medico> AddAsync(Medico medico)
         {
-             _contextMedico.Medico.Add(medico);
-                await _contextMedico.SaveChangesAsync(); 
-                return medico;
+            _contextMedico.Medico.Add(medico);
+            await _contextMedico.SaveChangesAsync();
+            return medico;
         }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Medico>> GetAllAsync()
         {
             return await _contextMedico.Medico.ToListAsync();
         }
 
-        public Task<Medico?> GetByIdAsync(int id)
+        public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            Medico? medico = new Medico();
+            medico = GetByIdAsync(id);
+
+            if ( medico is not null)
+            {
+                _contextMedico.Remove(id);
+                return true;
+            }
+
+            return false;
         }
 
-        public Task<bool> UpdateAsync(int id, Medico medico)
+
+        public Medico? GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return _contextMedico.Medico.Find(id);
+        }
+
+        public bool Update(int id, Medico medicoActualizado)
+        {
+            Medico? medico = new Medico();
+            medico = GetByIdAsync(id);
+
+            if ( medico is not null)
+            {
+                medico.Apellidos = medicoActualizado.Apellidos;
+                medico.Especialidad = medicoActualizado.Especialidad;
+                medico.Nombres = medicoActualizado.Nombres;
+
+                _contextMedico.Medico.Update(medico);
+
+                return true;
+            }
+
+            return false;
         }
         public async Task<Medico> getMedicoRandom()
         {
@@ -58,8 +81,8 @@ namespace CitasMedicas.Services
                     "Ramiro", "Jorge", "Mateo", "Ignacio", "Simón"
                 };
 
-                        // Lista de apellidos
-                List<string> listaApellidos = new List<string>
+            // Lista de apellidos
+            List<string> listaApellidos = new List<string>
                 {
                     "González", "Rodríguez", "García", "Martínez", "López",
                     "Pérez", "Sánchez", "Ramírez", "Torres", "Flores",
@@ -73,8 +96,8 @@ namespace CitasMedicas.Services
                     "León", "Salazar", "Mejía", "Herrera", "Calderón"
                 };
 
-                        // Lista de especialidades médicas
-                        List<string> listaEspecialidades = new List<string>
+            // Lista de especialidades médicas
+            List<string> listaEspecialidades = new List<string>
                 {
                     "Cardiología", "Pediatría", "Neurología", "Dermatología", "Ginecología",
                     "Oftalmología", "Traumatología", "Psiquiatría", "Oncología", "Urología",
@@ -108,5 +131,6 @@ namespace CitasMedicas.Services
 
             return medico;
         }
+
     }
 }

@@ -4,6 +4,7 @@ using CitasMedicas.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CitasMedicas.Migrations
 {
     [DbContext(typeof(CitasMedicasDbContext))]
-    partial class CitasMedicasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251109012606_UpdateCita2")]
+    partial class UpdateCita2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,26 +33,26 @@ namespace CitasMedicas.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_cita"));
 
-                    b.Property<int>("IdMedico")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("fecha_cita")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("id_medico")
+                        .HasColumnType("int");
+
                     b.HasKey("id_cita");
 
-                    b.HasIndex("IdMedico");
+                    b.HasIndex("id_medico");
 
                     b.ToTable("Cita");
                 });
 
             modelBuilder.Entity("CitasMedicas.Models.Medico", b =>
                 {
-                    b.Property<int>("IdMedico")
+                    b.Property<int>("id_medico")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMedico"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_medico"));
 
                     b.Property<string>("Apellidos")
                         .IsRequired()
@@ -63,34 +66,35 @@ namespace CitasMedicas.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdMedico");
+                    b.HasKey("id_medico");
 
                     b.ToTable("Medico");
                 });
 
             modelBuilder.Entity("CitasMedicas.Models.Paciente", b =>
                 {
-                    b.Property<int>("IdPaciente")
+                    b.Property<int>("id_paciente")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPaciente"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id_paciente"));
 
-                    b.Property<string>("Apellidos")
+                    b.Property<string>("apellidos")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("FechaNacimiento")
+                    b.Property<DateOnly>("fechaNacimiento")
                         .HasColumnType("date");
 
-                    b.Property<string>("Nombres")
+                    b.Property<string>("nombres")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("IdPaciente");
+                    b.HasKey("id_paciente");
 
                     b.ToTable("Paciente");
                 });
@@ -99,7 +103,7 @@ namespace CitasMedicas.Migrations
                 {
                     b.HasOne("CitasMedicas.Models.Medico", "Medico")
                         .WithMany()
-                        .HasForeignKey("IdMedico")
+                        .HasForeignKey("id_medico")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

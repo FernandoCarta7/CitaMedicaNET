@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using CitasMedicas.Models;
 using CitasMedicas.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +19,22 @@ public class PacienteController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var pacientes = await _service.GetAllAsync();
-        
-        
-        
+
+
+
         return Ok(pacientes);
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult?> GetPacienteById(int id)
+    {
+        Paciente? paciente = await _service.GetByIdAsync(id);
+        
+        if (paciente is not null)
+        {
+            return Ok(paciente);
+        }
+        return null;
+    }
     
 }

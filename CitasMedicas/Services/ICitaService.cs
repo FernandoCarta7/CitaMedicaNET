@@ -6,8 +6,8 @@ namespace CitasMedicas.Services
     {
         Task<IEnumerable<Cita>> GetAllAsync();
         Task<Cita?> GetByIdAsync(int id);
-        Task<Cita> AddAsync(Cita cita);
+        Cita Add(Cita cita);
         Task<bool> UpdateAsync(int id, Cita cita);
-        Task<bool> DeleteAsync(int id);
+        bool Delete(int id);
     }
 }
